@@ -1,0 +1,77 @@
+# この viminfo ファイルは Vim 8.2 によって生成されました.
+# 変更する際には十分注意してください!
+
+# Viminfo version
+|1,4
+
+# このファイルが書かれた時の 'encoding' の値
+*encoding=utf-8
+
+
+# hlsearch on (H) or off (h):
+~h
+# コマンドライン 項目の履歴 (新しいものから古いものへ):
+:q!
+|2,0,1710115425,,"q!"
+
+# 検索文字列 項目の履歴 (新しいものから古いものへ):
+
+# 式 項目の履歴 (新しいものから古いものへ):
+
+# 入力行 項目の履歴 (新しいものから古いものへ):
+
+# デバッグ行 項目の履歴 (新しいものから古いものへ):
+
+# レジスタ:
+
+# ファイルマーク:
+'0  1  0  ~\_dotnet\SmartThingsTerminal\SmartThingsTerminal\Scenario.cs
+|4,48,1,0,1710116320,"~\\_dotnet\\SmartThingsTerminal\\SmartThingsTerminal\\Scenario.cs"
+'1  1  0  ~\_dotnet\SmartThingsTerminal\SmartThingsTerminal\Scenario.cs
+|4,49,1,0,1710116286,"~\\_dotnet\\SmartThingsTerminal\\SmartThingsTerminal\\Scenario.cs"
+'2  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,50,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+
+# ジャンプリスト (新しいものが先):
+-'  1  0  ~\_dotnet\SmartThingsTerminal\SmartThingsTerminal\Scenario.cs
+|4,39,1,0,1710116320,"~\\_dotnet\\SmartThingsTerminal\\SmartThingsTerminal\\Scenario.cs"
+-'  1  0  ~\_dotnet\SmartThingsTerminal\SmartThingsTerminal\Scenario.cs
+|4,39,1,0,1710116286,"~\\_dotnet\\SmartThingsTerminal\\SmartThingsTerminal\\Scenario.cs"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+-'  1  0  ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+|4,39,1,0,1707298149,"~\\_Rust\\_rust_example\\interpreter\\rune\\scripts\\http.rn"
+
+# ファイル内マークの履歴 (新しいものから古いもの):
+
+> ~\_Rust\_rust_example\interpreter\rune\scripts\http.rn
+	*	1707298148	0
+	"	1	0
