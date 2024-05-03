@@ -39,12 +39,16 @@ swap_button.addEventListener("click", function(ev){
 }, false);
 
 function swap() {
-        var a = document.querySelector("#edit");
-        var b = document.querySelector("#preview");
+        var a = document.querySelector("#edit1");
+        var b = document.querySelector("#preview1");
 	swap_panel(a, b);
 
         var a2 = document.querySelector("#edit2");
         var b2 = document.querySelector("#preview2");
+	swap_panel(a2, b2);
+
+        var a2 = document.querySelector("#edit3");
+        var b2 = document.querySelector("#preview3");
 	swap_panel(a2, b2);
 
 }
@@ -79,12 +83,14 @@ function swap_panel(a, b) {
 function keybindChange(e) {
 	if (keybindChange_button.textContent == "none") {
              keybindChange_button.textContent = "vim";
-	     editor.setKeyboardHandler("ace/keyboard/vim");  
+	     editor1.setKeyboardHandler("ace/keyboard/vim");  
 	     editor2.setKeyboardHandler("ace/keyboard/vim");  
+	     editor3.setKeyboardHandler("ace/keyboard/vim");  
 	} else if (keybindChange_button.textContent == "vim") {
              keybindChange_button.textContent = "none";
-	     editor.setKeyboardHandler("");  
+	     editor1.setKeyboardHandler("");  
 	     editor2.setKeyboardHandler("");  
+	     editor3.setKeyboardHandler("");  
 	}
 }
 function schemeChange(e) {
@@ -93,48 +99,16 @@ function schemeChange(e) {
 	if (schemeToggl_button.textContent == "Dark") {
      	  schemeToggl_button.textContent = "Light";
 
-          var output = document.querySelector('#output');
-          output.classList.remove("dark");
-          output.classList.add("light");
-
-          var preview = document.querySelector('#preview-wrapper');
-          preview.classList.remove("dark");
-          preview.classList.add("light");
-
-          editor.setTheme('ace/theme/chrome');
-
-          var output2 = document.querySelector('#output2');
-          output2.classList.remove("dark");
-          output2.classList.add("light");
-
-          var preview2 = document.querySelector('#preview-wrapper2');
-          preview2.classList.remove("dark");
-          preview2.classList.add("light");
-
-          editor2.setTheme('ace/theme/chrome');
+           editor1.schemeChange_light();
+           editor2.schemeChange_light();
+           editor3.schemeChange_light();
 
 	} else if (schemeToggl_button.textContent == "Light") {
      	  schemeToggl_button.textContent = "Dark";
 
-          var output = document.querySelector('#output');
-          output.classList.remove("light");
-          output.classList.add("dark");
-
-          var preview = document.querySelector('#preview-wrapper');
-          preview.classList.remove("light");
-          preview.classList.add("dark");
-
-          editor.setTheme('ace/theme/one_dark');
-
-          var output2 = document.querySelector('#output2');
-          output2.classList.remove("light");
-          output2.classList.add("dark");
-
-          var preview2 = document.querySelector('#preview-wrapper2');
-          preview2.classList.remove("light");
-          preview2.classList.add("dark");
-
-          editor2.setTheme('ace/theme/one_dark');
+           editor1.schemeChange_dark();
+           editor2.schemeChange_dark();
+           editor3.schemeChange_dark();
 
 	}
 
@@ -174,7 +148,8 @@ async function openFile() {
     reader.onload = function(e){
         let input = reader.result;
         //presetValue(input);
-        presetValue(editor, input);
+        //presetValue(editor, input);
+        editor1.presetValue( input);
         document.querySelectorAll('.column').forEach((element) => {
             element.scrollTo({top: 0});
         });
@@ -197,7 +172,7 @@ const saveFileOptions = {
 
 async function saveAsFile() {
 
-    let value = editor.getValue();
+    let value = editor1.getValue();
   const newHandle = await window.showSaveFilePicker(saveFileOptions);
 
   const writableStream = await newHandle.createWritable();
@@ -225,7 +200,7 @@ async function saveFile() {
 	  return;
 
   }
-    let value = editor.getValue();
+    let value = editor1.getValue();
   //const newHandle = await window.showSaveFilePicker(saveFileOptions);
 
   const writableStream = await fileHandle.createWritable();

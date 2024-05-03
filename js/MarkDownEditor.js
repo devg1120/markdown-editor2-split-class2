@@ -45,6 +45,13 @@ export class MarkDownEditor{
         this.editor = editor;
     };
 
+    getValue() {
+       return this.editor.getValue();
+    }
+setKeyboardHandler(value) {
+        this.editor.setKeyboardHandler(value);
+}
+
     sessionSync (editor2)  {
           editor2.setSession(this.editor.getSession());
           let value = editor2.getValue();
@@ -119,6 +126,29 @@ export class MarkDownEditor{
         scrollBarSync = false;
     };
 
+   schemeChange_dark (){
 
+          var output = document.querySelector('#output' + this.no);    
+          output.classList.remove("light");    
+          output.classList.add("dark");    
+    
+          var preview = document.querySelector('#preview-wrapper' + this.no);    
+          preview.classList.remove("light");    
+          preview.classList.add("dark");    
+    
+          this.editor.setTheme('ace/theme/one_dark');    
+    }   
+    
+   schemeChange_light (){
 
+          var output = document.querySelector('#output' + this.no);    
+          output.classList.remove("dart");    
+          output.classList.add("light");    
+    
+          var preview = document.querySelector('#preview-wrapper' + this.no);    
+          preview.classList.remove("dart");    
+          preview.classList.add("light");    
+    
+          this.editor.setTheme('ace/theme/chrome');    
+    }   
 }
