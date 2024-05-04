@@ -9,6 +9,7 @@ var keybindChange_button = document.querySelector("#keybindChange");
 var swap_button = document.querySelector("#swap");
 var split_select = document.querySelector("#split-select");
 var fontsize_number = document.querySelector("#fontsize-number");
+var cursor_color_select = document.querySelector("#cursor-color-select");
 
 var filepath = null;
 var fileHandle = null;
@@ -77,6 +78,54 @@ fontsize_number.addEventListener(
   },
   false,
 );
+
+cursor_color_select.addEventListener(
+  "input",
+  function (ev) {
+    cursor_color_change();
+  },
+  false,
+);
+
+function cursor_color_change() {
+
+   console.log("cursor_color:" + cursor_color_select.value);
+   console.log(document.styleSheets.length);
+/*
+   for ( var s = 0; s < document.styleSheets.length; s++) {
+       const stylesheet = document.styleSheets[s];
+       console.log("");
+       console.log(s);
+       console.log(stylesheet.ownerNode);
+       console.log(stylesheet.href);
+       //console.dir(stylesheet);
+       
+       for ( var i = 0; i < stylesheet.cssRules.length ; i++) {
+          console.log(stylesheet.cssRules[i].selectorText);
+          if (stylesheet.cssRules[i].selectorText == ".ace_cursor") {
+               console.dir(stylesheet.cssRules[i]);
+          }
+       }
+   }
+ */
+       const stylesheet = document.styleSheets[5];
+       //console.dir(stylesheet);
+       const roule33 = document.styleSheets[5].cssRules[33];
+       const roule34 = document.styleSheets[5].cssRules[34];
+       //console.log(roule33);
+       //console.log(roule34);
+       console.log(roule33.selectorText);
+       console.log(roule33.cssText);
+       console.log(roule34.selectorText);
+       console.log(roule34.cssText);
+       //roule33.cssText = "ace_cursor-layer .ace_cursor { border-left: 5px solid blue; color: blue !important; }";
+       //roule34.cssText = ".ace_cursor-layer.ace_overwrite-cursors .ace_cursor { background-color: blue; }";
+
+	roule33.style.borderLeft= "5px solid yellow"
+        roule33.style.borderLeftColor= "yellow"
+        roule33.style.color= "yellow"
+	roule34.style.backgroundColor = "yellow";
+}
 
 function fontsize_change() {
    //console.log("fontsize:" + fontsize_number.value);
