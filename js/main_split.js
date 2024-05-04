@@ -8,6 +8,7 @@ var schemeToggl_button = document.querySelector("#schemeToggle");
 var keybindChange_button = document.querySelector("#keybindChange");
 var swap_button = document.querySelector("#swap");
 var split_select = document.querySelector("#split-select");
+var fontsize_number = document.querySelector("#fontsize-number");
 
 var filepath = null;
 var fileHandle = null;
@@ -68,6 +69,22 @@ split_select.addEventListener(
   },
   false,
 );
+
+fontsize_number.addEventListener(
+  "change",
+  function (ev) {
+    fontsize_change();
+  },
+  false,
+);
+
+function fontsize_change() {
+   //console.log("fontsize:" + fontsize_number.value);
+   var size = Number(fontsize_number.value);
+   editor1.setFontSize(size);
+   editor2.setFontSize(size);
+   editor3.setFontSize(size);
+}
 
 function splitting() {
   var container1 = document.querySelector("#container1");

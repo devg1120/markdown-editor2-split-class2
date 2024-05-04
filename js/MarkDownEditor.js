@@ -9,7 +9,8 @@ export class MarkDownEditor {
     editor.setOptions({
       maxLines: Infinity,
       indentedSoftWrap: false,
-      fontSize: 18,
+      //fontSize: 16,
+      fontSize: 20,
       autoScrollEditorIntoView: true,
       // https://ace.c9.io/build/kitchen-sink.html
       // https://gist.github.com/RyanNutt/cb8d60997d97905f0b2aea6c3b5c8ee0
@@ -46,6 +47,9 @@ export class MarkDownEditor {
   }
   setKeyboardHandler(value) {
     this.editor.setKeyboardHandler(value);
+  }
+  setFontSize(value) {
+    this.editor.setFontSize(value);
   }
 
   sessionSync(editor2) {
