@@ -87,7 +87,7 @@ cursor_color_select.addEventListener(
   false,
 );
 
-function cursor_color_change() {
+function cursor_color_change_() {
 
    console.log("cursor_color:" + cursor_color_select.value);
    console.log(document.styleSheets.length);
@@ -125,6 +125,59 @@ function cursor_color_change() {
         roule33.style.borderLeftColor= "yellow"
         roule33.style.color= "yellow"
 	roule34.style.backgroundColor = "yellow";
+ cursor_color_change_() ;
+}
+
+function getRoule(selector) {
+   for ( var s = 0; s < document.styleSheets.length; s++) {
+       const stylesheet = document.styleSheets[s];
+       for ( var i = 0; i < stylesheet.cssRules.length ; i++) {
+          if (stylesheet.cssRules[i].selectorText == selector) {
+                return stylesheet.cssRules[i];
+          }
+       }
+   }
+   return null
+}
+
+function cursor_color_change() {
+   console.log("cursor_color:" + cursor_color_select.value);
+   let cursor_color = cursor_color_select.value;
+
+ let style_order = [
+	 {
+		 selector: ".ace_cursor-layer .ace_cursor",
+                 style: {
+			 borderLeft:"5px solid $",
+			 borderLeftColor: "$",
+                         color: "$"
+		 }
+	 },
+	 {
+		 selector: ".ace_cursor-layer.ace_overwrite-cursors .ace_cursor",
+                 style: {
+			 backgroundColor : "$",
+		 }
+	 }
+  ];
+  for (let i = 0; i < style_order.length; i++) {
+            //console.log(">>"+style_order[i].selector);
+            let roule = getRoule(style_order[i].selector);
+            if (roule == null ) {
+                 console.log("css null:" + style_order[i].selector);
+
+	    } else {
+                 console.log(roule);
+                 for  (name in style_order[i].style) {
+                    let value = style_order[i].style[name];
+                    //console.log(name + ":" + value);
+                    value = value.replace("$",cursor_color);
+                    let cmd = "roule.style." + name + "=\"" + value + "\";";
+                    //console.log(cmd);
+                    eval(cmd);
+		 }
+	    }
+  }
 }
 
 function fontsize_change() {
