@@ -68,13 +68,22 @@
 	    <button id="keybindChange">none</button>
 	     &ensp; 
 	    <button id="swap">swap</button>
+	     &ensp; 
+	     &ensp; 
+	     <label>split</label>
+	     &ensp; 
+             <select name="split" id="split-select">
+               <option value="">0</option>
+               <option value="">2</option>
+               <option value="">3</option>
+             </select>
         </div>
         <div id="github"><a href="https://github.com/tanabe/markdown-live-preview"><img src="image/GitHub-Mark-Light-32px.webp"></a></div>
     </header>
 
      <div  data-flex-splitter-vertical  id="main"  style="flex: auto;">
 
-        <div  data-flex-splitter-horizontal  id="container"  style="flex: auto;">
+        <div  data-flex-splitter-horizontal  id="container1"  class="container" style="flex: auto;">
 
             <div id="edit1" class="edit column" style="flex: auto;">
                 <div id="editor-wrapper1" class="editor-wrapper">
@@ -91,9 +100,9 @@
             </div>
         </div>
 
-        <div role="separator" tabindex="1" class="separator" ></div>
+        <div role="separator" tabindex="1" class="separator hide" id="separator2" ></div>
 
-        <div  data-flex-splitter-horizontal  id="container2"  style="flex: auto; height: 30%;">
+        <div  data-flex-splitter-horizontal  id="container2" class="container hide" style="flex: auto; height: 30%;">
 
             <div id="edit2" class="edit column" style="flex: auto;">
                 <div id="editor-wrapper2" class="editor-wrapper">
@@ -110,9 +119,9 @@
             </div>
         </div>
 
-        <div role="separator" tabindex="1" class="separator" ></div>
+        <div role="separator" tabindex="1" class="separator hide" id="separator3" ></div>
 
-        <div  data-flex-splitter-horizontal  id="container3"  style="flex: auto; height: 30%;">
+        <div  data-flex-splitter-horizontal  id="container3" class="container hide" style="flex: auto; height: 30%;">
 
             <div id="edit3" class="edit column" style="flex: auto;">
                 <div id="editor-wrapper3" class="editor-wrapper">

@@ -127,16 +127,16 @@ footer {
 }
 
 /*-----------------------------*/
-/*
 .container {
   flex-grow: 1;
   overflow: hidden;
   width: 100%;
   margin: 0 auto;
   background-color: #fff;
+  /* border-bottom: 1px solid #e8e8e8;*/
   display: flex;
 }
-*/
+
 /*
  * https://retval.jp/blog/overflow-scroll-custom/
  */
@@ -185,10 +185,46 @@ footer {
 
 }
 /*-----------------------------*/
+/*
+#container2 {
+  flex-grow: 1;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  display: flex;
+}
 
-.container.hide {
-     display:none;
+
+#edit2::-webkit-scrollbar {
+  width: 16px;
 }
-.separator.hide {
-     display:none;
+#edit2::-webkit-scrollbar-track {
+  background-color: #fff;
 }
+#edit2::-webkit-scrollbar-thumb {
+  background-color: #3760d0;
+  border-radius: 0px;
+}
+#preview2::-webkit-scrollbar {
+  width: 16px;
+}
+#preview2::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+#preview2::-webkit-scrollbar-thumb {
+  background-color: #3760d0;
+  border-radius: 0px;
+}
+#editor-wrapper2 {
+}
+#preview-wrapper2.dark {
+   border-left: 15px solid #0d1117; 
+}
+#preview-wrapper2.light {
+   border-left: 15px solid #fff; 
+}
+#preview2.column {
+  white-space: normal;
+}
++/

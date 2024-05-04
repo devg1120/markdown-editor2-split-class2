@@ -1,119 +1,188 @@
-import { MarkDownEditor }  from  "./MarkDownEditor.js";
+import { MarkDownEditor } from "./MarkDownEditor.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+var open_button = document.querySelector("#openfile");
+var saveAs_button = document.querySelector("#saveAsfile");
+var save_button = document.querySelector("#savefile");
+var filename_label = document.querySelector("#filename");
+var schemeToggl_button = document.querySelector("#schemeToggle");
+var keybindChange_button = document.querySelector("#keybindChange");
+var swap_button = document.querySelector("#swap");
+var split_select = document.querySelector("#split-select");
 
- var open_button = document.querySelector('#openfile');
- var saveAs_button = document.querySelector('#saveAsfile');
- var save_button = document.querySelector('#savefile');
- var filename_label = document.querySelector('#filename');
- var schemeToggl_button = document.querySelector('#schemeToggle');
- var keybindChange_button = document.querySelector('#keybindChange');
- var swap_button = document.querySelector('#swap');
+var filepath = null;
+var fileHandle = null;
+var localFileSaveContent = "";
 
- var filepath = null;
- var fileHandle = null
- var localFileSaveContent = "";
+open_button.addEventListener(
+  "click",
+  function (ev) {
+    openFile();
+  },
+  false,
+);
 
-open_button.addEventListener("click", function(ev){
-      openFile();
-}, false);
+save_button.addEventListener(
+  "click",
+  function (ev) {
+    saveFile();
+  },
+  false,
+);
 
-save_button.addEventListener("click", function(ev){
-      saveFile();
-}, false);
+saveAs_button.addEventListener(
+  "click",
+  function (ev) {
+    saveAsFile();
+  },
+  false,
+);
 
-saveAs_button.addEventListener("click", function(ev){
-      saveAsFile();
-}, false);
+schemeToggl_button.addEventListener(
+  "click",
+  function (ev) {
+    schemeChange();
+  },
+  false,
+);
 
-schemeToggl_button.addEventListener("click", function(ev){
-      schemeChange();
-}, false);
+keybindChange_button.addEventListener(
+  "click",
+  function (ev) {
+    keybindChange();
+  },
+  false,
+);
 
-keybindChange_button.addEventListener("click", function(ev){
-      keybindChange();
-}, false);
+swap_button.addEventListener(
+  "click",
+  function (ev) {
+    swap();
+  },
+  false,
+);
 
-swap_button.addEventListener("click", function(ev){
-      swap();
-}, false);
+split_select.addEventListener(
+  "change",
+  function (ev) {
+    splitting();
+  },
+  false,
+);
+
+function splitting() {
+  var container1 = document.querySelector("#container1");
+  var separator2 = document.querySelector("#separator2");
+  var container2 = document.querySelector("#container2");
+  var separator3 = document.querySelector("#separator3");
+  var container3 = document.querySelector("#container3");
+
+  if (split_select.selectedIndex == 0) {
+    console.log("split:0");
+
+    display(container1, "show");
+    display(separator2, "hide");
+    display(container2, "hide");
+    display(separator3, "hide");
+    display(container3, "hide");
+  } else if (split_select.selectedIndex == 1) {
+    console.log("split:1");
+
+    display(container1, "show");
+    display(separator2, "show");
+    display(container2, "show");
+    display(separator3, "hide");
+    display(container3, "hide");
+  } else if (split_select.selectedIndex == 2) {
+    console.log("split:2");
+
+    display(container1, "show");
+    display(separator2, "show");
+    display(container2, "show");
+    display(separator3, "show");
+    display(container3, "show");
+  }
+
+  function display(element, op) {
+    if (op == "show") {
+      if (element.classList.contains("hide")) {
+        element.classList.remove("hide");
+      }
+    } else if (op == "hide") {
+      if (!element.classList.contains("hide")) {
+        element.classList.add("hide");
+      }
+    }
+  }
+}
 
 function swap() {
-        var a = document.querySelector("#edit1");
-        var b = document.querySelector("#preview1");
-	swap_panel(a, b);
+  var a = document.querySelector("#edit1");
+  var b = document.querySelector("#preview1");
+  swap_panel(a, b);
 
-        var a2 = document.querySelector("#edit2");
-        var b2 = document.querySelector("#preview2");
-	swap_panel(a2, b2);
+  var a2 = document.querySelector("#edit2");
+  var b2 = document.querySelector("#preview2");
+  swap_panel(a2, b2);
 
-        var a2 = document.querySelector("#edit3");
-        var b2 = document.querySelector("#preview3");
-	swap_panel(a2, b2);
-
+  var a2 = document.querySelector("#edit3");
+  var b2 = document.querySelector("#preview3");
+  swap_panel(a2, b2);
 }
 
 function swap_panel(a, b) {
-	var p1 = a.parentNode,
-		p2 = b.parentNode,
-		i1,
-		i2;
+  var p1 = a.parentNode,
+    p2 = b.parentNode,
+    i1,
+    i2;
 
-	if (!p1 || !p2 || p1.isEqualNode(b) || p2.isEqualNode(a)) return;
+  if (!p1 || !p2 || p1.isEqualNode(b) || p2.isEqualNode(a)) return;
 
-	for (var i = 0; i < p1.children.length; i++) {
-		if (p1.children[i].isEqualNode(a)) {
-			i1 = i;
-		}
-	}
-	for (var i = 0; i < p2.children.length; i++) {
-		if (p2.children[i].isEqualNode(b)) {
-			i2 = i;
-		}
-	}
+  for (var i = 0; i < p1.children.length; i++) {
+    if (p1.children[i].isEqualNode(a)) {
+      i1 = i;
+    }
+  }
+  for (var i = 0; i < p2.children.length; i++) {
+    if (p2.children[i].isEqualNode(b)) {
+      i2 = i;
+    }
+  }
 
-	if (p1.isEqualNode(p2) && i1 < i2) {
-		i2++;
-	}
-	p1.insertBefore(b, p1.children[i1]);
-	p2.insertBefore(a, p2.children[i2]);
+  if (p1.isEqualNode(p2) && i1 < i2) {
+    i2++;
+  }
+  p1.insertBefore(b, p1.children[i1]);
+  p2.insertBefore(a, p2.children[i2]);
 }
-
 
 function keybindChange(e) {
-	if (keybindChange_button.textContent == "none") {
-             keybindChange_button.textContent = "vim";
-	     editor1.setKeyboardHandler("ace/keyboard/vim");  
-	     editor2.setKeyboardHandler("ace/keyboard/vim");  
-	     editor3.setKeyboardHandler("ace/keyboard/vim");  
-	} else if (keybindChange_button.textContent == "vim") {
-             keybindChange_button.textContent = "none";
-	     editor1.setKeyboardHandler("");  
-	     editor2.setKeyboardHandler("");  
-	     editor3.setKeyboardHandler("");  
-	}
+  if (keybindChange_button.textContent == "none") {
+    keybindChange_button.textContent = "vim";
+    editor1.setKeyboardHandler("ace/keyboard/vim");
+    editor2.setKeyboardHandler("ace/keyboard/vim");
+    editor3.setKeyboardHandler("ace/keyboard/vim");
+  } else if (keybindChange_button.textContent == "vim") {
+    keybindChange_button.textContent = "none";
+    editor1.setKeyboardHandler("");
+    editor2.setKeyboardHandler("");
+    editor3.setKeyboardHandler("");
+  }
 }
 function schemeChange(e) {
+  console.log(schemeToggl_button.textContent);
+  if (schemeToggl_button.textContent == "Dark") {
+    schemeToggl_button.textContent = "Light";
 
-	console.log(schemeToggl_button.textContent);  
-	if (schemeToggl_button.textContent == "Dark") {
-     	  schemeToggl_button.textContent = "Light";
+    editor1.schemeChange_light();
+    editor2.schemeChange_light();
+    editor3.schemeChange_light();
+  } else if (schemeToggl_button.textContent == "Light") {
+    schemeToggl_button.textContent = "Dark";
 
-           editor1.schemeChange_light();
-           editor2.schemeChange_light();
-           editor3.schemeChange_light();
-
-	} else if (schemeToggl_button.textContent == "Light") {
-     	  schemeToggl_button.textContent = "Dark";
-
-           editor1.schemeChange_dark();
-           editor2.schemeChange_dark();
-           editor3.schemeChange_dark();
-
-	}
-
-
-
+    editor1.schemeChange_dark();
+    editor2.schemeChange_dark();
+    editor3.schemeChange_dark();
+  }
 }
 
 //    editor.setFontSize(14);
@@ -131,33 +200,31 @@ const pickerOpts = {
   multiple: false,
 };
 
-
 async function openFile() {
   //const [fileHandle] = await window.showOpenFilePicker(pickerOpts);
   [fileHandle] = await window.showOpenFilePicker(pickerOpts);
 
-   filepath = await fileHandle.getFile();
+  filepath = await fileHandle.getFile();
 
-   console.log(filepath.name);
-   filename_label.innerText = " [ " + filepath.name + " ] ";
+  console.log(filepath.name);
+  filename_label.innerText = " [ " + filepath.name + " ] ";
 
-    var reader = new FileReader();
-    console.dir(filepath);
-    reader.readAsText(filepath); 
+  var reader = new FileReader();
+  console.dir(filepath);
+  reader.readAsText(filepath);
 
-    reader.onload = function(e){
-        let input = reader.result;
-        //presetValue(input);
-        //presetValue(editor, input);
-        editor1.presetValue( input);
-        document.querySelectorAll('.column').forEach((element) => {
-            element.scrollTo({top: 0});
-        });
-        localFileSaveContent = input;
-        diff_ck_localFileSaveContent(input);
-    }
+  reader.onload = function (e) {
+    let input = reader.result;
+    //presetValue(input);
+    //presetValue(editor, input);
+    editor1.presetValue(input);
+    document.querySelectorAll(".column").forEach((element) => {
+      element.scrollTo({ top: 0 });
+    });
+    localFileSaveContent = input;
+    diff_ck_localFileSaveContent(input);
+  };
 }
-
 
 const saveFileOptions = {
   types: [
@@ -171,36 +238,31 @@ const saveFileOptions = {
 };
 
 async function saveAsFile() {
-
-    let value = editor1.getValue();
+  let value = editor1.getValue();
   const newHandle = await window.showSaveFilePicker(saveFileOptions);
 
   const writableStream = await newHandle.createWritable();
-  
+
   await writableStream.write(value);
 
   await writableStream.close();
 
   localFileSaveContent = value;
   diff_ck_localFileSaveContent(value);
-   /********************************************/
-   filepath = await newHandle.getFile();
+  /********************************************/
+  filepath = await newHandle.getFile();
 
-   console.log(filepath.name);
-   filename_label.innerText = " [ " + filepath.name + " ] ";
-   fileHandle = newHandle;
-
-
+  console.log(filepath.name);
+  filename_label.innerText = " [ " + filepath.name + " ] ";
+  fileHandle = newHandle;
 }
 
 async function saveFile() {
-
   if (filepath == null) {
-       alert("filepath null!!!");
-	  return;
-
+    alert("filepath null!!!");
+    return;
   }
-    let value = editor1.getValue();
+  let value = editor1.getValue();
   //const newHandle = await window.showSaveFilePicker(saveFileOptions);
 
   const writableStream = await fileHandle.createWritable();
@@ -210,21 +272,21 @@ async function saveFile() {
   await writableStream.close();
   localFileSaveContent = value;
   diff_ck_localFileSaveContent(value);
-
 }
 
-    let hasEdited = false;
-    let scrollBarSync = false;
-    let hasEdited2 = false;
-    let scrollBarSync2 = false;
+let hasEdited = false;
+let scrollBarSync = false;
+let hasEdited2 = false;
+let scrollBarSync2 = false;
 
-    const localStorageNamespace = 'com.markdownlivepreview';
-    const localStorageKey = 'last_state';
-    const localStorageScrollBarKey = 'scroll_bar_settings';
-    const confirmationMessage = 'Are you sure you want to reset? Your changes will be lost.';
+const localStorageNamespace = "com.markdownlivepreview";
+const localStorageKey = "last_state";
+const localStorageScrollBarKey = "scroll_bar_settings";
+const confirmationMessage =
+  "Are you sure you want to reset? Your changes will be lost.";
 
-    // default template
-    const defaultInput = `# Markdown syntax guide
+// default template
+const defaultInput = `# Markdown syntax guide
 
 ## Headers
 
@@ -293,241 +355,258 @@ ${"`"}${"`"}${"`"}
 This web site is using ${"`"}markedjs/marked${"`"}.
 `;
 
-    let setupEditor = (editor_id, preview_id) => {
-        let editor = ace.edit(editor_id);
-        editor.preview_id = preview_id;
-        editor.getSession().setUseWrapMode(true);
-        editor.setOptions({
-            maxLines: Infinity,
-            indentedSoftWrap: false,
-            fontSize: 18,
-            autoScrollEditorIntoView: true,
-		// https://ace.c9.io/build/kitchen-sink.html
-		// https://gist.github.com/RyanNutt/cb8d60997d97905f0b2aea6c3b5c8ee0
-            //theme: 'ace/theme/chrome',
-            //theme: 'ace/theme/monokai',
-            //theme: 'ace/theme/cobalt',
-            theme: 'ace/theme/one_dark',
-        });
+let setupEditor = (editor_id, preview_id) => {
+  let editor = ace.edit(editor_id);
+  editor.preview_id = preview_id;
+  editor.getSession().setUseWrapMode(true);
+  editor.setOptions({
+    maxLines: Infinity,
+    indentedSoftWrap: false,
+    fontSize: 18,
+    autoScrollEditorIntoView: true,
+    // https://ace.c9.io/build/kitchen-sink.html
+    // https://gist.github.com/RyanNutt/cb8d60997d97905f0b2aea6c3b5c8ee0
+    //theme: 'ace/theme/chrome',
+    //theme: 'ace/theme/monokai',
+    //theme: 'ace/theme/cobalt',
+    theme: "ace/theme/one_dark",
+  });
 
-        var MarkdownMode = ace.require("ace/mode/markdown").Mode;
-        editor.session.setMode(new MarkdownMode());
+  var MarkdownMode = ace.require("ace/mode/markdown").Mode;
+  editor.session.setMode(new MarkdownMode());
 
-        //editor.setKeyboardHandler("ace/keyboard/vim");
-        editor.setShowPrintMargin(false);
+  //editor.setKeyboardHandler("ace/keyboard/vim");
+  editor.setShowPrintMargin(false);
 
-        editor.on('change', () => {
-            let changed = editor.getValue() != defaultInput;
-            if (changed) {
-                hasEdited = true;
-            }
-            let value = editor.getValue();
-            convert(preview_id, value);
-            diff_ck_localFileSaveContent(value);
-            saveLastContent(value);
-        });
-
-        return editor;
-    };
-
-    let sessionSync = (editor, editor2) => {
-          editor2.setSession(editor.getSession());
-          let value = editor2.getValue();
-          convert(editor2.preview_id, value);
+  editor.on("change", () => {
+    let changed = editor.getValue() != defaultInput;
+    if (changed) {
+      hasEdited = true;
     }
+    let value = editor.getValue();
+    convert(preview_id, value);
+    diff_ck_localFileSaveContent(value);
+    saveLastContent(value);
+  });
 
-    // Render markdown text as html
-    let convert = (id, markdown) => {
-        let options = {
-            headerIds: false,
-            mangle: false
-        };
-        let html = marked.parse(markdown, options);
-        let sanitized = DOMPurify.sanitize(html);
-        //document.querySelector('#output').innerHTML = sanitized;
-        document.querySelector("#" + id).innerHTML = sanitized;
-    };
+  return editor;
+};
 
-    // Reset input text
-    let reset = () => {
-        let changed = editor.getValue() != defaultInput;
-        if (hasEdited || changed) {
-            var confirmed = window.confirm(confirmationMessage);
-            if (!confirmed) {
-                return;
-            }
-        }
-        //presetValue(defaultInput);
-        presetValue(editor, defaultInput);
-        document.querySelectorAll('.column').forEach((element) => {
-            element.scrollTo({top: 0});
-        });
-    };
+let sessionSync = (editor, editor2) => {
+  editor2.setSession(editor.getSession());
+  let value = editor2.getValue();
+  convert(editor2.preview_id, value);
+};
 
-    //let presetValue = (value) => {
-    let presetValue = (editor, value) => {
-        editor.setValue(value);
-        editor.moveCursorTo(0, 0);
-        editor.focus();
-        editor.navigateLineEnd();
-        hasEdited = false;
-    };
+// Render markdown text as html
+let convert = (id, markdown) => {
+  let options = {
+    headerIds: false,
+    mangle: false,
+  };
+  let html = marked.parse(markdown, options);
+  let sanitized = DOMPurify.sanitize(html);
+  //document.querySelector('#output').innerHTML = sanitized;
+  document.querySelector("#" + id).innerHTML = sanitized;
+};
 
-    // ----- sync scroll position -----
+// Reset input text
+let reset = () => {
+  let changed = editor.getValue() != defaultInput;
+  if (hasEdited || changed) {
+    var confirmed = window.confirm(confirmationMessage);
+    if (!confirmed) {
+      return;
+    }
+  }
+  //presetValue(defaultInput);
+  presetValue(editor, defaultInput);
+  document.querySelectorAll(".column").forEach((element) => {
+    element.scrollTo({ top: 0 });
+  });
+};
 
-    let initScrollBarSync = (settings) => {
-        let checkbox = document.querySelector('#sync-scroll-checkbox');
-        checkbox.checked = settings;
-        scrollBarSync = settings;
+//let presetValue = (value) => {
+let presetValue = (editor, value) => {
+  editor.setValue(value);
+  editor.moveCursorTo(0, 0);
+  editor.focus();
+  editor.navigateLineEnd();
+  hasEdited = false;
+};
 
-        checkbox.addEventListener('change', (event) => {
-            let checked = event.currentTarget.checked;
-            scrollBarSync = checked;
-            saveScrollBarSettings(checked);
-        });
+// ----- sync scroll position -----
 
-        document.querySelector('#edit').addEventListener('scroll', (event) => {
-            if (!scrollBarSync) {
-                return;
-            }
-            let editorElement = event.currentTarget;
-            let ratio = editorElement.scrollTop / (editorElement.scrollHeight - editorElement.clientHeight);
+let initScrollBarSync = (settings) => {
+  let checkbox = document.querySelector("#sync-scroll-checkbox");
+  checkbox.checked = settings;
+  scrollBarSync = settings;
 
-            let previewElement = document.querySelector('#preview');
-            let targetY = (previewElement.scrollHeight - previewElement.clientHeight) * ratio;
-            previewElement.scrollTo(0, targetY);
-        });
-    };
+  checkbox.addEventListener("change", (event) => {
+    let checked = event.currentTarget.checked;
+    scrollBarSync = checked;
+    saveScrollBarSettings(checked);
+  });
 
-    let enableScrollBarSync = () => {
-        scrollBarSync = true;
-    };
+  document.querySelector("#edit").addEventListener("scroll", (event) => {
+    if (!scrollBarSync) {
+      return;
+    }
+    let editorElement = event.currentTarget;
+    let ratio =
+      editorElement.scrollTop /
+      (editorElement.scrollHeight - editorElement.clientHeight);
 
-    let disableScrollBarSync = () => {
-        scrollBarSync = false;
-    };
+    let previewElement = document.querySelector("#preview");
+    let targetY =
+      (previewElement.scrollHeight - previewElement.clientHeight) * ratio;
+    previewElement.scrollTo(0, targetY);
+  });
+};
 
-    // ----- sync scroll position 2-----
+let enableScrollBarSync = () => {
+  scrollBarSync = true;
+};
+
+let disableScrollBarSync = () => {
+  scrollBarSync = false;
+};
+
+// ----- sync scroll position 2-----
 //
-    let initScrollBarSync2 = (settings) => {
-        let checkbox = document.querySelector('#sync-scroll-checkbox2');
-        checkbox.checked = settings;
-        scrollBarSync2 = settings;
+let initScrollBarSync2 = (settings) => {
+  let checkbox = document.querySelector("#sync-scroll-checkbox2");
+  checkbox.checked = settings;
+  scrollBarSync2 = settings;
 
-        checkbox.addEventListener('change', (event) => {
-            let checked = event.currentTarget.checked;
-            scrollBarSync2 = checked;
-            saveScrollBarSettings(checked);
-        });
+  checkbox.addEventListener("change", (event) => {
+    let checked = event.currentTarget.checked;
+    scrollBarSync2 = checked;
+    saveScrollBarSettings(checked);
+  });
 
-        document.querySelector('#edit2').addEventListener('scroll', (event) => {
-            if (!scrollBarSync2) {
-                return;
-            }
-            let editorElement = event.currentTarget;
-            let ratio = editorElement.scrollTop / (editorElement.scrollHeight - editorElement.clientHeight);
+  document.querySelector("#edit2").addEventListener("scroll", (event) => {
+    if (!scrollBarSync2) {
+      return;
+    }
+    let editorElement = event.currentTarget;
+    let ratio =
+      editorElement.scrollTop /
+      (editorElement.scrollHeight - editorElement.clientHeight);
 
-            let previewElement = document.querySelector('#preview2');
-            let targetY = (previewElement.scrollHeight - previewElement.clientHeight) * ratio;
-            previewElement.scrollTo(0, targetY);
-        });
-    };
+    let previewElement = document.querySelector("#preview2");
+    let targetY =
+      (previewElement.scrollHeight - previewElement.clientHeight) * ratio;
+    previewElement.scrollTo(0, targetY);
+  });
+};
 
-    let enableScrollBarSync2 = () => {
-        scrollBarSync2 = true;
-    };
+let enableScrollBarSync2 = () => {
+  scrollBarSync2 = true;
+};
 
-    let disableScrollBarSync2 = () => {
-        scrollBarSync2 = false;
-    };
+let disableScrollBarSync2 = () => {
+  scrollBarSync2 = false;
+};
 
-    // ----- clipboard utils -----
+// ----- clipboard utils -----
 
-    let copyToClipboard = (text, successHandler, errorHandler) => {
-        navigator.clipboard.writeText(text).then(
-            () => {
-                successHandler();
-            },
+let copyToClipboard = (text, successHandler, errorHandler) => {
+  navigator.clipboard.writeText(text).then(
+    () => {
+      successHandler();
+    },
 
-            () => {
-                errorHandler();
-            }
-        );
-    };
+    () => {
+      errorHandler();
+    },
+  );
+};
 
-    let notifyCopied = () => {
-        let labelElement = document.querySelector("#copy-button a");
-        labelElement.innerHTML = "Copied!";
-        setTimeout(() => {
-            labelElement.innerHTML = "Copy";
-        }, 1000)
-    };
+let notifyCopied = () => {
+  let labelElement = document.querySelector("#copy-button a");
+  labelElement.innerHTML = "Copied!";
+  setTimeout(() => {
+    labelElement.innerHTML = "Copy";
+  }, 1000);
+};
 
-    // ----- setup -----
+// ----- setup -----
 
-    // setup navigation actions
-    let setupResetButton = () => {
-        document.querySelector("#reset-button").addEventListener('click', (event) => {
-            event.preventDefault();
-            reset();
-        });
-    };
+// setup navigation actions
+let setupResetButton = () => {
+  document.querySelector("#reset-button").addEventListener("click", (event) => {
+    event.preventDefault();
+    reset();
+  });
+};
 
-    let setupCopyButton = (editor) => {
-        document.querySelector("#copy-button").addEventListener('click', (event) => {
-            event.preventDefault();
-            let value = editor.getValue();
-            copyToClipboard(value, () => {
-                notifyCopied();
-            },
-            () => {
-                // nothing to do
-            });
-        });
-    };
+let setupCopyButton = (editor) => {
+  document.querySelector("#copy-button").addEventListener("click", (event) => {
+    event.preventDefault();
+    let value = editor.getValue();
+    copyToClipboard(
+      value,
+      () => {
+        notifyCopied();
+      },
+      () => {
+        // nothing to do
+      },
+    );
+  });
+};
 
-    // ----- local file save check -----
-    let diff_ck_localFileSaveContent = (content) => {
-	 if (localFileSaveContent != content ) {
-              if (save_button.classList.contains("diff")) {
+// ----- local file save check -----
+let diff_ck_localFileSaveContent = (content) => {
+  if (localFileSaveContent != content) {
+    if (save_button.classList.contains("diff")) {
+    } else {
+      save_button.classList.add("diff");
+    }
+  } else {
+    if (save_button.classList.contains("diff")) {
+      save_button.classList.remove("diff");
+    } else {
+    }
+  }
+};
+// ----- local state -----
 
-	      } else {
-                 save_button.classList.add("diff") ;
-	      }
+let loadLastContent = () => {
+  let lastContent = Storehouse.getItem(localStorageNamespace, localStorageKey);
+  return lastContent;
+};
 
-	 } else {
-              if (save_button.classList.contains("diff")) {
-                 save_button.classList.remove("diff") ;
+let saveLastContent = (content) => {
+  let expiredAt = new Date(2099, 1, 1);
+  Storehouse.setItem(
+    localStorageNamespace,
+    localStorageKey,
+    content,
+    expiredAt,
+  );
+};
 
-	      } else {
-	      }
+let loadScrollBarSettings = () => {
+  let lastContent = Storehouse.getItem(
+    localStorageNamespace,
+    localStorageScrollBarKey,
+  );
+  return lastContent;
+};
 
-	 }
-    };
-    // ----- local state -----
+let saveScrollBarSettings = (settings) => {
+  let expiredAt = new Date(2099, 1, 1);
+  Storehouse.setItem(
+    localStorageNamespace,
+    localStorageScrollBarKey,
+    settings,
+    expiredAt,
+  );
+};
 
-    let loadLastContent = () => {
-        let lastContent = Storehouse.getItem(localStorageNamespace, localStorageKey);
-        return lastContent;
-    };
-
-    let saveLastContent = (content) => {
-        let expiredAt = new Date(2099, 1, 1);
-        Storehouse.setItem(localStorageNamespace, localStorageKey, content, expiredAt);
-    };
-
-    let loadScrollBarSettings = () => {
-        let lastContent = Storehouse.getItem(localStorageNamespace, localStorageScrollBarKey);
-        return lastContent;
-    };
-
-    let saveScrollBarSettings = (settings) => {
-        let expiredAt = new Date(2099, 1, 1);
-        Storehouse.setItem(localStorageNamespace, localStorageScrollBarKey, settings, expiredAt);
-    };
-
-
-    // ----- entry point -----
+// ----- entry point -----
 /*
     let lastContent = loadLastContent();
     let editor = setupEditor();
@@ -538,43 +617,24 @@ This web site is using ${"`"}markedjs/marked${"`"}.
     }
 */
 
-    let update_sync = (value) => {
-              console.log("update_sync");
-              diff_ck_localFileSaveContent(value);
-              saveLastContent(value);
-    };
+let update_sync = (value) => {
+  //console.log("update_sync");
+  diff_ck_localFileSaveContent(value);
+  saveLastContent(value);
+};
 
+//let editor = new MarkDownEditor(update_sync, 1);
+let editor1 = new MarkDownEditor(update_sync, 1, "editor1", "output1");
+editor1.presetValue(defaultInput);
+let scrollBarSettings = loadScrollBarSettings() || false;
+editor1.initScrollBarSync(scrollBarSettings);
 
-    //let editor = new MarkDownEditor(update_sync, 1);
-    let editor1 = new MarkDownEditor(update_sync, 1, "editor1", "output1");
-    editor1.presetValue(defaultInput);
-    let scrollBarSettings = loadScrollBarSettings() || false;
-    editor1.initScrollBarSync(scrollBarSettings);
+let editor2 = new MarkDownEditor(update_sync, 2, "editor2", "output2");
+editor2.initScrollBarSync(scrollBarSettings);
 
-    let editor2 = new MarkDownEditor(update_sync, 2, "editor2", "output2");
-    editor2.initScrollBarSync(scrollBarSettings);
+sessionSync(editor1.editor, editor2.editor);
 
-    sessionSync( editor1.editor, editor2.editor);
+let editor3 = new MarkDownEditor(update_sync, 3, "editor3", "output3");
+editor3.initScrollBarSync(scrollBarSettings);
 
-    let editor3 = new MarkDownEditor(update_sync, 3, "editor3", "output3");
-    editor3.initScrollBarSync(scrollBarSettings);
-
-    sessionSync( editor1.editor, editor3.editor);
-
-
-/*
-    let editor = setupEditor("editor", "output");
-    presetValue(editor,defaultInput);
-
-    setupResetButton();
-    setupCopyButton(editor);
-
-    let scrollBarSettings = loadScrollBarSettings() || false;
-    initScrollBarSync(scrollBarSettings);
-    initScrollBarSync2(scrollBarSettings);
-
-    let editor2 = setupEditor("editor2", "output2");
-
-    sessionSync( editor, editor2);
-*/
-});
+sessionSync(editor1.editor, editor3.editor);
