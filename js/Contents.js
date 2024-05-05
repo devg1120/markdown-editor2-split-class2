@@ -1,6 +1,6 @@
 import * as content1 from "./contents/content1.js";
 import * as content2 from "./contents/content2.js";
-import * as content3 from "./contents/content2.js";
+import * as content3 from "./contents/content3.js";
 
 export class Contents {
   constructor() {
@@ -16,7 +16,7 @@ export class Contents {
   }
 
   getNamelist() {
-     names = [];
+     let names = [];
      for ( let key in this.dict) {
        names.push( key );
      }

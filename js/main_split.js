@@ -9,6 +9,7 @@ var schemeToggl_button = document.querySelector("#schemeToggle");
 var keybindChange_button = document.querySelector("#keybindChange");
 var swap_button = document.querySelector("#swap");
 var split_select = document.querySelector("#split-select");
+var contents_select = document.querySelector("#contents-select");
 var fontsize_number = document.querySelector("#fontsize-number");
 var cursor_color_select = document.querySelector("#cursor-color-select");
 
@@ -72,6 +73,14 @@ split_select.addEventListener(
   false,
 );
 
+contents_select.addEventListener(
+  "change",
+  function (ev) {
+    content_change();
+  },
+  false,
+);
+
 fontsize_number.addEventListener(
   "change",
   function (ev) {
@@ -87,6 +96,12 @@ cursor_color_select.addEventListener(
   },
   false,
 );
+
+function content_change() {
+  //console.log(contents_select.selectedIndex);
+  //console.log(contents_select.value);
+  editor1.presetValue(contents.getContent(contents_select.value));
+}
 
 function cursor_color_change_() {
 
@@ -745,10 +760,23 @@ let update_sync = (value) => {
 
 let contents = new Contents();
 
+let names = contents.getNamelist();
+
+for ( let i = 0; i< names.length; i++)  {
+    //console.log(names[i]);
+    let name = names[i];
+    const option = document.createElement('option');
+    option.value = name;
+    option.textContent = name;
+    contents_select.appendChild(option)
+}
+
+
 //let editor = new MarkDownEditor(update_sync, 1);
 let editor1 = new MarkDownEditor(update_sync, 1, "editor1", "output1");
 //editor1.presetValue(defaultInput);
 editor1.presetValue(contents.getContent("content1"));
+contents_select.options[1].selected = true;
 
 let scrollBarSettings = loadScrollBarSettings() || false;
 editor1.initScrollBarSync(scrollBarSettings);

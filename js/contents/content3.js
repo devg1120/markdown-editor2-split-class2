@@ -79,7 +79,7 @@ Paragraphs and Line Breaks
 
 [Links with title](http://localhost/ "link title")
 
-`<link>` : <https://github.com>
+\`<link>\` : <https://github.com>
 
 [Reference link][id/name] 
 
@@ -91,11 +91,11 @@ GFM a-tail link @pandao
 
 ####Inline code
 
-`$ npm install marked`
+\`$ npm install marked\`
 
 ####Code Blocks (Indented style)
 
-Indented 4 spaces, like `<pre>` (Preformatted Text).
+Indented 4 spaces, like \`<pre>\` (Preformatted Text).
 
     <?php
         echo "Hello world!";
@@ -110,7 +110,7 @@ Code Blocks (Preformatted text):
 
 ####Javascript　
 
-```javascript
+\`\`\`javascript
 function test(){
 	console.log("Hello world!");
 }
@@ -147,11 +147,11 @@ function test(){
 
 var testBox = box();
 testBox.add("jQuery").remove("jQuery");
-```
+\`\`\`
 
 ####HTML code
 
-```html
+\`\`\`html
 <!DOCTYPE html>
 <html>
     <head>
@@ -162,7 +162,7 @@ testBox.add("jQuery").remove("jQuery");
         <h1>Hello world!</h1>
     </body>
 </html>
-```
+\`\`\`
 
 ###Images
 
@@ -232,8 +232,8 @@ Content Cell  | Content Cell
 
 | Function name | Description                    |
 | ------------- | ------------------------------ |
-| `help()`      | Display the help window.       |
-| `destroy()`   | **Destroy your computer!**     |
+| \`help()\`      | Display the help window.       |
+| \`destroy()\`   | **Destroy your computer!**     |
 
 | Item      | Value |
 | --------- | -----:|
@@ -302,7 +302,7 @@ $$\sin(\alpha)^{\theta}=\sum_{i=0}^{n}(x^i + \cos(f))$$
                 
 ###FlowChart
 
-```flow
+\`\`\`flow
 st=>start: Login
 op=>operation: Login operation
 cond=>condition: Successful Yes or No?
@@ -311,16 +311,16 @@ e=>end: To admin
 st->op->cond
 cond(yes)->e
 cond(no)->op
-```
+\`\`\`
 
 ###Sequence Diagram
                     
-```seq
+\`\`\`seq
 Andrew->China: Says Hello 
 Note right of China: China thinks\nabout it 
 China-->Andrew: How are you? 
 Andrew->>China: I am good thanks!
-```
+\`\`\`
 
 ###End
 `;
