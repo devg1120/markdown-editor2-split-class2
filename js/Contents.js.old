@@ -1,0 +1,29 @@
+import * as content1 from "./contents/content1.js";
+import * as content2 from "./contents/content2.js";
+import * as content3 from "./contents/content2.js";
+
+export class Contents {
+  constructor() {
+      this.dict = {
+         content1 : content1.content,
+         content2 : content2.content,
+         content3 : content3.content,
+      };
+  }
+
+  length() {
+    return this.dict.length;
+  }
+
+  getNamelist() {
+     names = [];
+     for ( let key in this.dict) {
+       names.push( key );
+     }
+     return names;
+  }
+
+  getContent( name ) {
+     return this.dict[name];
+  }
+}

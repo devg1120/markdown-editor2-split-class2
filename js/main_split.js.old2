@@ -1,5 +1,4 @@
 import { MarkDownEditor } from "./MarkDownEditor.js";
-import { Contents } from "./Contents.js";
 
 var open_button = document.querySelector("#openfile");
 var saveAs_button = document.querySelector("#saveAsfile");
@@ -743,13 +742,9 @@ let update_sync = (value) => {
   saveLastContent(value);
 };
 
-let contents = new Contents();
-
 //let editor = new MarkDownEditor(update_sync, 1);
 let editor1 = new MarkDownEditor(update_sync, 1, "editor1", "output1");
-//editor1.presetValue(defaultInput);
-editor1.presetValue(contents.getContent("content1"));
-
+editor1.presetValue(defaultInput);
 let scrollBarSettings = loadScrollBarSettings() || false;
 editor1.initScrollBarSync(scrollBarSettings);
 
